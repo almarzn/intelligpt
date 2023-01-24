@@ -1,18 +1,14 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.almarzn.intelligpt</id>
-    <name>IntelliJ Platform Plugin intelligpt</name>
+    <name>Intelligpt</name>
     <vendor>almarzn</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.almarzn.intelligpt.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.almarzn.intelligpt.services.MyProjectService"/>
+        <intentionAction>
+            <className>com.github.almarzn.intelligpt.listeners.ExplainIntent</className>
+        </intentionAction>
     </extensions>
-
-    <applicationListeners>
-        <listener class="com.github.almarzn.intelligpt.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
 </idea-plugin>
