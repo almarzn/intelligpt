@@ -4,9 +4,24 @@
     <name>Intelligpt</name>
     <vendor>almarzn</vendor>
 
+    <projectListeners>
+        <listener class="com.github.almarzn.intelligpt.listeners.IntelliGptListener" topic="com.intellij.openapi.project.ProjectManagerListener" />
+    </projectListeners>
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
+        <applicationService
+                serviceImplementation="com.github.almarzn.intelligpt.services.AppSettingsState"/>
+
+        <applicationConfigurable
+                parentId="tools"
+                instance="com.github.almarzn.intelligpt.AppSettingsConfigurable"
+                id="org.intellij.sdk.settings.AppSettingsConfigurable"
+                displayName="IntelliGPT"/>
+
+        <notificationGroup id="IntelliGpt"
+                           displayType="BALLOON"
+                           key="notification.group.name"/>
         <intentionAction>
             <className>com.github.almarzn.intelligpt.listeners.ExplainIntent</className>
         </intentionAction>

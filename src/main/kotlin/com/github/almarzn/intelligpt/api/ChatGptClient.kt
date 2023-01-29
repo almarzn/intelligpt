@@ -1,24 +1,26 @@
-package com.github.almarzn.intelligpt
+package com.github.almarzn.intelligpt.api
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.github.almarzn.intelligpt.services.AppSettingsState
 import com.github.kittinunf.fuel.Fuel
-import com.github.kittinunf.fuel.core.awaitResponseResult
-import com.github.kittinunf.fuel.jackson.jacksonDeserializerOf
 import com.github.kittinunf.fuel.jackson.objectBody
 import com.github.kittinunf.fuel.jackson.responseObject
 import com.github.kittinunf.result.map
 
 class ChatGptClient {
-    private val token = "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"
     private val defaultParams = Params(
             model = "text-davinci-003",
-            maxTokens = 256,
+            maxTokens = 64,
             temperature = .2
     )
 
     fun generateResponse(prompt: String): String {
+        val apiKey = AppSettingsState.instance.apiKey
+        if (apiKey.isNullOrBlank()) {
+            throw NoApiKeyConfiguredException()
+        }
         val (_, _, result) = Fuel.post("https://api.openai.com/v1/completions")
-                .header("Authorization", "Bearer $token")
+                .header("Authorization", "Bearer $apiKey")
                 .objectBody(defaultParams.copy(prompt = prompt))
                 .responseObject<Response>()
 
