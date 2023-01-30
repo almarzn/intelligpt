@@ -52,10 +52,14 @@ class InsertAsCommentAction(
 
         val text = editor.document.getText(lineRange)
 
+        if (margin >= text.length) {
+            return
+        }
+
         val lastWhitespace = text.slice(0..margin).lastIndexOf(' ')
 
         if (lastWhitespace <= 0) {
-            return;
+            return
         }
 
         editor.caretModel.moveToOffset(editor.document.getLineStartOffset(line) + lastWhitespace)

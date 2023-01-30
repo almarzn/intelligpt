@@ -10,8 +10,8 @@ import com.github.kittinunf.result.map
 class ChatGptClient {
     private val defaultParams = Params(
             model = "text-davinci-003",
-            maxTokens = 64,
-            temperature = .2
+            maxTokens = 256,
+            temperature = .7
     )
 
     fun generateResponse(prompt: String): String {

@@ -5,6 +5,7 @@ import com.github.almarzn.intelligpt.ui.ChatGptResponseComponent
 import com.github.almarzn.intelligpt.ui.ChatGptResponseComponent.Companion.LOADING_PREVIEW
 import com.github.almarzn.intelligpt.ui.ChatGptResponseComponent.Companion.NO_PREVIEW
 import com.intellij.codeInsight.generation.actions.CommentByLineCommentAction
+import com.intellij.codeInsight.intention.FileModifier
 import com.intellij.codeInsight.intention.impl.BaseIntentionAction
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
@@ -36,7 +37,15 @@ class ExplainIntent : BaseIntentionAction() {
 
     override fun getText() = "ChatGPT: Explain code"
 
-    override fun isAvailable(project: Project, editor: Editor?, file: PsiFile?) = true
+    //    This function is used to check if the editor selection model currently has a non-blank selected text. It,
+    //    returns true if the editor selection model has a non-blank selected text, or false if otherwise.
+    override fun isAvailable(project: Project, editor: Editor?, file: PsiFile?) = editor
+            ?.selectionModel
+            ?.selectedText
+            ?.isNotBlank() ?: false
+
+    override fun startInWriteAction() = false
+
     override fun invoke(project: Project, editor: Editor?, file: PsiFile?) {
         val selectedText = editor!!.selectionModel.selectedText
 
