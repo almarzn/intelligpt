@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/almarzn/intelligpt/5e20704feedfd4daf61d463353be09ba91776f2e/src/main/resources/META-INF/pluginIcon.svg " height="64px" /> 
+
 # intelligpt
 
 ![Build](https://github.com/almarzn/intelligpt/workflows/Build/badge.svg)
