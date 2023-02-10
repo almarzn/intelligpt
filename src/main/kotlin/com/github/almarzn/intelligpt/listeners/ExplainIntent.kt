@@ -1,6 +1,7 @@
 package com.github.almarzn.intelligpt.listeners
 
 import com.github.almarzn.intelligpt.action.InsertAsCommentAction
+import com.github.almarzn.intelligpt.services.AppSettingsState
 import com.github.almarzn.intelligpt.ui.ChatGptResponseComponent
 import com.github.almarzn.intelligpt.ui.ChatGptResponseComponent.Companion.LOADING_PREVIEW
 import com.github.almarzn.intelligpt.ui.ChatGptResponseComponent.Companion.NO_PREVIEW
@@ -55,9 +56,10 @@ class ExplainIntent : BaseIntentionAction() {
 
         component.startLoading()
 
+        val phrase = AppSettingsState.instance.phrase
         ReadAction.nonBlocking(InvokeChatGptAction(
                 project,
-                "Explain the purpose of the following : \n$selectedText"
+                "$phrase\n$selectedText"
         ))
                 .expireWith(popup)
                 .coalesceBy(this)
