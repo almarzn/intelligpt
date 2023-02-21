@@ -16,6 +16,7 @@ import javax.annotation.Nullable
 @State(name = "org.intellij.sdk.settings.AppSettingsState", storages = [Storage("IntelliGptSettingsPlugin.xml")])
 class AppSettingsState : PersistentStateComponent<AppSettingsState?> {
     var apiKey: String? = null
+    var phrase: String? = null
 
     override fun loadState(state: AppSettingsState) {
         XmlSerializerUtil.copyBean(state, this)

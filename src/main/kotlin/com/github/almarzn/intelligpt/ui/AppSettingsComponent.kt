@@ -13,6 +13,7 @@ import javax.swing.JPanel
 class AppSettingsComponent {
     val panel: JPanel
     private lateinit var apiKeyTextField: JBTextField
+    private lateinit var phraseTextField: JBTextField
 
     init {
         panel = panel {
@@ -21,11 +22,21 @@ class AppSettingsComponent {
                  apiKeyTextField = textField().component
              }
             row {
+                label("Phrase")
+                phraseTextField = textField().component
+            }
+            row {
                 cell()
                 browserLink("Generate an API Key", "https://beta.openai.com/account/api-keys")
             }
         }
     }
+    
+    var phrase: String
+        get() = phraseTextField.text
+        set(newText) {
+            phraseTextField.text = newText
+        }
 
     val preferredFocusedComponent: JComponent
         get() = apiKeyTextField

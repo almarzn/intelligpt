@@ -25,17 +25,19 @@ class AppSettingsConfigurable : Configurable {
     override fun createComponent(): JComponent? {
         mySettingsComponent = AppSettingsComponent()
         mySettingsComponent!!.apiKey = instance.apiKey ?: ""
+        mySettingsComponent!!.phrase = instance.phrase ?: "Explain the purpose of the following : "
         return mySettingsComponent!!.panel
     }
 
     override fun isModified(): Boolean {
         val settings = instance
-        return mySettingsComponent!!.apiKey != settings.apiKey
+        return mySettingsComponent!!.apiKey != settings.apiKey || mySettingsComponent!!.phrase != settings.phrase
     }
 
     override fun apply() {
         val settings = instance
         settings.apiKey = mySettingsComponent!!.apiKey
+        settings.phrase = mySettingsComponent!!.phrase
     }
 
     override fun reset() {
